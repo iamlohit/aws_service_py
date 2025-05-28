@@ -32,3 +32,10 @@ s3c.upload_file(file_1, bucket_name, file_1)
 obj = s3.Object(bucket_name, file_1)
 body = obj.get()['Body'].read()
 print(body)
+
+# Update 'file_1' in bucket with new content from 'file_2'
+s3.Object(bucket_name, file_1).put(Body=open(file_2, 'rb'))
+obj = s3.Object(bucket_name, file_1)
+# Print to check the updated body.
+body = obj.get()['Body'].read()
+print(body)
