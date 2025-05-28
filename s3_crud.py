@@ -39,3 +39,10 @@ obj = s3.Object(bucket_name, file_1)
 # Print to check the updated body.
 body = obj.get()['Body'].read()
 print(body)
+
+# Delete the file from bucket
+s3.Object(bucket_name, file_1).delete()
+
+# Delete the bucket (Bucket should be empty)
+bucket = s3.Bucket(bucket_name)
+bucket.delete()
