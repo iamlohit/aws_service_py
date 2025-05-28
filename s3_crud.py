@@ -26,7 +26,7 @@ s3.Bucket(bucket_name).upload_file(Filename=file_1, Key=file_1)
 # OR by using Client instead of resource Positional Args
 # S3.Client.upload_file(Filename, Bucket, Key, ExtraArgs=None, Callback=None, Config=None)
 s3c = boto3.client('s3')
-s3c.Client.upload_file(file_1, bucket_name, file_1)
+s3c.upload_file(file_1, bucket_name, file_1)
 
 # READ & print the file from the bucket
 obj = s3.Object(bucket_name, file_1)
