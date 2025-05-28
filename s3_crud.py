@@ -22,3 +22,8 @@ file_2 = 'file_2.txt'
 
 # Upload 'file_1' to the new bucket
 s3.Bucket(bucket_name).upload_file(Filename=file_1, Key=file_1)
+
+# READ & print the file from the bucket
+obj = s3.Object(bucket_name, file_1)
+body = obj.get()['Body'].read()
+print(body)
