@@ -49,9 +49,10 @@ rt_response = ec2.create_route_table(VpcId=vpc_id)
 rt_id = rt_response['RouteTable']['RouteTableId']
 route = ec2.create_route(
   RouteTable=rt_id,
-  DestinationCidrBlock='0.0.0.0/0'
+  DestinationCidrBlock='0.0.0.0/0',
   GatewayId=ig_id
-)
+  )
 print(f"Route Table with ID '{rt_id}' has been created.")
+
 # Create 3 subnets
 
