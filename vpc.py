@@ -35,7 +35,7 @@ response = ec2.describe_internet_gateways(
 internet_gateways = response.get('InternetGateways', [])
 
 if internet_gateways:
-  ig_id = internet_gateways[0]['InternetGateways']
+  ig_id = internet_gateways[0]['InternetGatewayId']
   print(f"Internet Gateway '{ig_name}' with ID '{ig_id}' already exists")
 else:
   ig_response = ec2.create_internet_gateway()
@@ -48,11 +48,15 @@ else:
 rt_response = ec2.create_route_table(VpcId=vpc_id)
 rt_id = rt_response['RouteTable']['RouteTableId']
 route = ec2.create_route(
-  RouteTable=rt_id,
+  RouteTableId=rt_id,
   DestinationCidrBlock='0.0.0.0/0',
   GatewayId=ig_id
   )
 print(f"Route Table with ID '{rt_id}' has been created.")
 
 # Create 3 subnets
+subnet_1 = ec2.create_subnet(VpcId=vpc_id, CidrBlock='10.0.1.0/24', AvailabilityZone='us-east-1a')
+subnet_2 = ec2.create_subnet(VpcId=vpc_id, CidrBlock='10.0.2.0/24', AvailabilityZone='us-east-1b')
+subnet_3 = ec2.create_subnet(VpcId=vpc_id, CidrBlock='10.0.3.0/24', AvailabilityZone='us-east-1c')
 
+print(f"Subnet_1 ID = '{subnet_1['Subnet']['SubnetId']}', Subnet_2 ID = '{subnet_2['Subnet']['SubnetId']}', Subnet_3 ID = '{subnet_3['Subnet']['SubnetId']}'")
