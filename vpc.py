@@ -44,10 +44,14 @@ else:
   ec2.attach_internet_gateway(VpcId=vpc_id, InternetGatewayId=ig_id)
   print(f"Internet Gateway '{ig_name}' with ID '{ig_id}' has been created.")
 
-
 # Create a route table and public route
-
-
-
+rt_response = ec2.create_route_table(VpcId=vpc_id)
+rt_id = rt_response['RouteTable']['RouteTableId']
+route = ec2.create_route(
+  RouteTable=rt_id,
+  DestinationCidrBlock='0.0.0.0/0'
+  GatewayId=ig_id
+)
+print(f"Route Table with ID '{rt_id}' has been created.")
 # Create 3 subnets
 
