@@ -67,3 +67,8 @@ response = rds.modify_db_cluster(
 print(f"Updated the scaling config for the DB cluster named '{db_cluster_id}'.")
 
 # Delete the DB Cluster
+response = rds.delete_db_cluster(
+    DBClusterIdentifier=db_cluster_id,
+    SkipFinalSnapshot=True # Since we dont need to take a snapshot of this test db cluster.
+  )
+print(f"The '{db_cluster_id}' is being deleted.")
